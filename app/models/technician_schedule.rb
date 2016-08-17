@@ -1,0 +1,3 @@
+class TechnicianSchedule < ApplicationRecord
+
+end
