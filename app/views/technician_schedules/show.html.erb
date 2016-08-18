@@ -7,7 +7,7 @@
 
 <h3>Schedule:<h3>
 
-<% @if technician_schedule.sunday_start.present? && @technician_schedule.sunday_end.present? %>
+<% if @technician_schedule.sunday_start.present? && @technician_schedule.sunday_end.present? %>
   <p>Sunday: <%= @technician_schedule.sunday_start %> - <%= @technician_schedule.sunday_end %></p>
 <% else %>
   <p>Sunday: --</p>

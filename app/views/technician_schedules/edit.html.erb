@@ -1,2 +1,71 @@
 <h1>TechnicianSchedules#edit</h1>
 <p>Find me in app/views/technician_schedules/edit.html.erb</p>
+
+<%= link_to "Back to this technician's schedule", technician_schedule_path(@technician_schedule) %>
+
+<h2>Edit this technician's schedule</h2>
+<%= form_for @technician_schedule do |f| %>
+  <div>
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div>
+    <%= f.label :sunday_start %><br>
+    <%= f.text_field :sunday_start %>
+  </div>
+  <div>
+    <%= f.label :sunday_end %><br>
+    <%= f.text_field :sunday_end %>
+  </div>
+  <div>
+    <%= f.label :monday_start %><br>
+    <%= f.text_field :monday_start %>
+  </div>
+  <div>
+    <%= f.label :monday_end %><br>
+    <%= f.text_field :monday_end %>
+  </div>
+  <div>
+    <%= f.label :tuesday_start %><br>
+    <%= f.text_field :tuesday_start %>
+  </div>
+  <div>
+    <%= f.label :tuesday_end %><br>
+    <%= f.text_field :tuesday_end %>
+  </div>
+  <div>
+    <%= f.label :wednesday_start %><br>
+    <%= f.text_field :wednesday_start %>
+  </div>
+  <div>
+    <%= f.label :wednesday_end %><br>
+    <%= f.text_field :wednesday_end %>
+  </div>
+  <div>
+    <%= f.label :thursday_start %><br>
+    <%= f.text_field :thursday_start %>
+  </div>
+  <div>
+    <%= f.label :thursday_end %><br>
+    <%= f.text_field :thursday_end %>
+  </div>
+  <div>
+    <%= f.label :friday_start %><br>
+    <%= f.text_field :friday_start %>
+  </div>
+  <div>
+    <%= f.label :friday_end %><br>
+    <%= f.text_field :friday_end %>
+  </div>
+  <div>
+    <%= f.label :saturday_start %><br>
+    <%= f.text_field :saturday_start %>
+  </div>
+  <div>
+    <%= f.label :saturday_end %><br>
+    <%= f.text_field :saturday_end %>
+  </div>
+  <div>
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
