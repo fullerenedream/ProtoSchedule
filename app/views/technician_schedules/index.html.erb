@@ -2,11 +2,16 @@
 <p>Find me in app/views/technician_schedules/index.html.erb
 <br>View technician_schedule id=1 at /technician_schedules/1</p>
 
+
+<!--FullCalendar container div-->
+<div id='calendar'></div>
+
+
 <%= link_to "Add a technician's schedule", new_technician_schedule_path %>
 <hr>
 <% @technician_schedules.each do |technician_schedule| %>
   <h3>User: <%= technician_schedule.user_id %></h3>
-  <h3>Schedule:<h3>
+  <h3>Schedule:</h3>
 
   <% if technician_schedule.sunday_start.present? && technician_schedule.sunday_end.present? %>
     <p>Sunday: <%= technician_schedule.sunday_start %> - <%= technician_schedule.sunday_end %></p>
@@ -64,3 +69,5 @@
 
   <hr>
 <% end %>
+
+
