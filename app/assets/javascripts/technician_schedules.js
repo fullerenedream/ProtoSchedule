@@ -8,6 +8,27 @@
 
 $(document).ready(function()
 {
+
+  //return alert($('#technician_schedules').data('technician_schedules'));
+  console.log(gon.technician_schedules);
+  var allSchedules = gon.technician_schedules;
+  console.log(allSchedules[0]);
+  var schedule0 = allSchedules[0];
+  console.log(schedule0["monday_start"]);
+
+  for (var i = 0; i < allSchedules.length; i++) {
+    var oneSchedule = allSchedules[i];
+    var scheduleObject = {
+      user_id: oneSchedule.user_id,
+      sunday_start: oneSchedule.sunday_start,
+      sunday_end: oneSchedule.sunday_end,
+      monday_start: oneSchedule.monday_start,
+      monday_end: oneSchedule.monday_end
+    }
+    console.log(scheduleObject);
+  }
+
+
   /*
     date store today date.
     d store today date.

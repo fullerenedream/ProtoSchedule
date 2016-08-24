@@ -2,7 +2,8 @@ class TechnicianSchedulesController < ApplicationController
 
 
   def index
-    @technician_schedules = TechnicianSchedule.all
+    # @technician_schedules = TechnicianSchedule.all
+    gon.technician_schedules = TechnicianSchedule.all
   end
 
   def show
