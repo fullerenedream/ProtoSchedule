@@ -8,27 +8,6 @@
 
 $(document).ready(function()
 {
-
-  //return alert($('#technician_schedules').data('technician_schedules'));
-  console.log(gon.technician_schedules);
-  var allSchedules = gon.technician_schedules;
-  console.log(allSchedules[0]);
-  var schedule0 = allSchedules[0];
-  console.log(schedule0["monday_start"]);
-
-  for (var i = 0; i < allSchedules.length; i++) {
-    var oneSchedule = allSchedules[i];
-    var scheduleObject = {
-      user_id: oneSchedule.user_id,
-      sunday_start: oneSchedule.sunday_start,
-      sunday_end: oneSchedule.sunday_end,
-      monday_start: oneSchedule.monday_start,
-      monday_end: oneSchedule.monday_end
-    }
-    console.log(scheduleObject);
-  }
-
-
   /*
     date store today date.
     d store today date.
@@ -39,6 +18,97 @@ $(document).ready(function()
   var d = date.getDate();
   var m = date.getMonth();
   var y = date.getFullYear();
+
+
+
+  //return alert($('#technician_schedules').data('technician_schedules'));
+  console.log(gon.technician_schedules);
+  var allSchedules = gon.technician_schedules;
+  console.log(allSchedules[0]);
+  var schedule0 = allSchedules[0];
+  console.log(schedule0["monday_start"]);
+  // console.log(gon.technician_schedules[0]);
+
+  function getCurrentSchedule(user_id) {
+    // this needs to be changed to make sure it only grabs the most recent schedule
+    var currentSchedule = gon.technician_schedules[user_id];
+    var scheduleObject = {
+      user_id: currentSchedule.user_id,
+      sunday_start: currentSchedule.sunday_start,
+      sunday_end: currentSchedule.sunday_end,
+      monday_start: currentSchedule.monday_start,
+      monday_end: currentSchedule.monday_end,
+      tuesday_start: currentSchedule.tuesday_start,
+      tuesday_end: currentSchedule.tuesday_end,
+      wednesday_start: currentSchedule.wednesday_start,
+      wednesday_end: currentSchedule.wednesday_end,
+      thursday_start: currentSchedule.thursday_start,
+      thursday_end: currentSchedule.thursday_end,
+      friday_start: currentSchedule.friday_start,
+      friday_end: currentSchedule.friday_end,
+      saturday_start: currentSchedule.saturday_start,
+      saturday_end: currentSchedule.saturday_end
+    }
+    console.log("currentSchedule:")
+    console.log(scheduleObject);
+    return scheduleObject;
+  }
+
+  schedule0 = getCurrentSchedule(0);
+
+  var currentScheduleEvent = [
+    {
+      id: schedule0.user_id,
+      title: schedule0.user_id,
+      start: schedule0.monday_start,
+      end: schedule0.monday_end,
+      dow: [1]
+    }
+  ];
+  console.log('currentScheduleEvent 0: mondays')
+  console.log(currentScheduleEvent);
+
+  var testEvent = [
+    {
+      title:'Business Hours',
+      start: '9:00', // a start time (9am in this example)
+      end: '18:00', // an end time (6pm in this example)
+      dow: [1, 2, 3, 4, 5], // Repeat Monday-Friday
+      rendering: 'inverse-background' // anything outside these hours is colored as 'background'
+    },
+    {
+      title: "Pat's Hours",
+      start: '9:00',
+      end: '18:00',
+      dow: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 'kim',
+      title: "Kim's Hours",
+      start: '11:00',
+      end: '18:00',
+      dow: [1, 2, 3, 4],
+      color: '#533A7B'
+    },
+    {
+      id: 'kim',
+      title: "Kim's Hours",
+      start: '9:00',
+      end: '14:00',
+      dow: [5],
+      color: '#533A7B'
+    },
+    {
+      title: "Sam's Hours",
+      start: '9:00',
+      end: '16:00',
+      dow: [1, 2, 3, 4, 5],
+      color: '#E05263'
+    }
+  ];
+
+
+
 
   /*
     Initialize fullCalendar and store into variable.
@@ -111,44 +181,49 @@ $(document).ready(function()
       for demo we have added predefined events in json object.
     */
 
-    events: [
-      {
-        title:'Business Hours',
-        start: '9:00', // a start time (9am in this example)
-        end: '18:00', // an end time (6pm in this example)
-        dow: [1, 2, 3, 4, 5], // Repeat Monday-Friday
-        rendering: 'inverse-background' // anything outside these hours is colored as 'background'
-      },
-      {
-        title: "Pat's Hours",
-        start: '9:00',
-        end: '18:00',
-        dow: [1, 2, 3, 4, 5]
-      },
-      {
-        id: 'kim',
-        title: "Kim's Hours",
-        start: '11:00',
-        end: '18:00',
-        dow: [1, 2, 3, 4],
-        color: '#533A7B'
-      },
-      {
-        id: 'kim',
-        title: "Kim's Hours",
-        start: '9:00',
-        end: '14:00',
-        dow: [5],
-        color: '#533A7B'
-      },
-      {
-        title: "Sam's Hours",
-        start: '9:00',
-        end: '16:00',
-        dow: [1, 2, 3, 4, 5],
-        color: '#E05263'
-      }
-    ]
+    events: testEvent
+    // events: currentScheduleEvent
+
+
+
+    // events: [
+    //   {
+    //     title:'Business Hours',
+    //     start: '9:00', // a start time (9am in this example)
+    //     end: '18:00', // an end time (6pm in this example)
+    //     dow: [1, 2, 3, 4, 5], // Repeat Monday-Friday
+    //     rendering: 'inverse-background' // anything outside these hours is colored as 'background'
+    //   },
+    //   {
+    //     title: "Pat's Hours",
+    //     start: '9:00',
+    //     end: '18:00',
+    //     dow: [1, 2, 3, 4, 5]
+    //   },
+    //   {
+    //     id: 'kim',
+    //     title: "Kim's Hours",
+    //     start: '11:00',
+    //     end: '18:00',
+    //     dow: [1, 2, 3, 4],
+    //     color: '#533A7B'
+    //   },
+    //   {
+    //     id: 'kim',
+    //     title: "Kim's Hours",
+    //     start: '9:00',
+    //     end: '14:00',
+    //     dow: [5],
+    //     color: '#533A7B'
+    //   },
+    //   {
+    //     title: "Sam's Hours",
+    //     start: '9:00',
+    //     end: '16:00',
+    //     dow: [1, 2, 3, 4, 5],
+    //     color: '#E05263'
+    //   }
+    // ]
   });
 
 });

@@ -1,0 +1,63 @@
+<h1>TechnicianSchedules#show</h1>
+<p>Find me in app/views/technician_schedules/show.html.erb
+<br>View technician_schedule id=1 at /technician_schedules/1</p>
+
+<%= link_to "Back to all technician_schedules", technician_schedules_path %><br/>
+
+<h2><%= @technician_schedule.user_id %> (<%= link_to "edit", edit_technician_schedule_path(@technician_schedule) %>, <%= link_to "delete", technician_schedule_path(@technician_schedule), method: :delete, data: {confirm: "You sure?"} %>)</h2>
+
+<h3>Schedule:<h3>
+
+<% if @technician_schedule.sunday_start.present? && @technician_schedule.sunday_end.present? %>
+  <p>Sunday: <%= @technician_schedule.sunday_start %> - <%= @technician_schedule.sunday_end %></p>
+<% else %>
+  <p>Sunday: --</p>
+<% end %>
+
+<% if @technician_schedule.monday_start.present? && @technician_schedule.monday_end.present? %>
+  <p>Monday: <%= @technician_schedule.monday_start %> - <%= @technician_schedule.monday_end %></p>
+<% else %>
+  <p>Monday: --</p>
+<% end %>
+
+<% if @technician_schedule.tuesday_start.present? && @technician_schedule.tuesday_end.present? %>
+  <p>Tuesday: <%= @technician_schedule.tuesday_start %> - <%= @technician_schedule.tuesday_end %></p>
+<% else %>
+  <p>Tuesday: --</p>
+<% end %>
+
+<% if @technician_schedule.wednesday_start.present? && @technician_schedule.wednesday_end.present? %>
+  <p>Wednesday: <%= @technician_schedule.wednesday_start %> - <%= @technician_schedule.wednesday_end %></p>
+<% else %>
+  <p>Wednesday: --</p>
+<% end %>
+
+<% if @technician_schedule.thursday_start.present? && @technician_schedule.thursday_end.present? %>
+  <p>Thursday: <%= @technician_schedule.thursday_start %> - <%= @technician_schedule.thursday_end %></p>
+<% else %>
+  <p>Thursday: --</p>
+<% end %>
+
+<% if @technician_schedule.friday_start.present? && @technician_schedule.friday_end.present? %>
+  <p>Friday: <%= @technician_schedule.friday_start %> - <%= @technician_schedule.friday_end %></p>
+<% else %>
+  <p>Friday: --</p>
+<% end %>
+
+<% if @technician_schedule.saturday_start.present? && @technician_schedule.saturday_end.present? %>
+  <p>Saturday: <%= @technician_schedule.saturday_start %> - <%= @technician_schedule.saturday_end %></p>
+<% else %>
+  <p>Saturday: --</p>
+<% end %>
+
+<% if @technician_schedule.created_at.present? %>
+  <p>Schedule created: <%= @technician_schedule.created_at %></p>
+<% else %>
+  <p>created_at field was left blank</p>
+<% end %>
+
+<% if @technician_schedule.updated_at.present? %>
+  <p>Schedule updated: <%= @technician_schedule.updated_at %></p>
+<% else %>
+  <p>updated_at field was left blank</p>
+<% end %>
