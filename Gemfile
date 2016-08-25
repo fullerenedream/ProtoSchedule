@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# Use gon to pass data to js files
 gem 'gon'
 
 group :development, :test do

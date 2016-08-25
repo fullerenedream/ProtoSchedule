@@ -3,6 +3,8 @@ class TechnicianSchedulesController < ApplicationController
 
   def index
     # @technician_schedules = TechnicianSchedule.all
+
+    # gon passes data to js files
     gon.technician_schedules = TechnicianSchedule.all
   end
 

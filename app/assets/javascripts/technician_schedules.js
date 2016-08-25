@@ -19,14 +19,67 @@ $(document).ready(function()
   var m = date.getMonth();
   var y = date.getFullYear();
 
+  // make sure epochTime is in Local Time
+  // e.g. epoch time 61200 = Thu Jan 01 1970 09:00:00 GMT-0800 (PST)
+  // do not input epoch time in UTC/GMT
+  function epochToDate(epochTime) {
+    // new Date() takes milliseconds, but our epochTime in seconds, so multiply by 1000
+    return new Date(epochTime*1000);
+  }
+  //console.log('try epochToDate on epoch time 61200 = 1 Jan 1970, 9:00 AM Local Time');
+  var ohNineHundred1970 = epochToDate(61200);
+  //console.log('ohNineHundred1970: ' + ohNineHundred1970);
+
+  function dateToHoursAndMinutes(date) {
+    var hours = date.getHours();
+    hoursString = String(hours);
+    //console.log('hoursString:' + hoursString);
+    var minutes;
+    var minutesString;
+    if (date.getMinutes().toString().length === 2) {
+      minutes = date.getMinutes();
+      minutesString = String(date.getMinutes());
+      //console.log('minutesString:' + minutesString);
+    }
+    else if (date.getMinutes().toString().length === 1){
+      minutesString = String('0') + String(date.getMinutes());
+      //console.log('minutesString:' + minutesString);
+      minutes = parseInt(minutesString, 10);
+      //console.log('minutes:' + minutes);
+    }
+    else {
+      alert('Error: date.getMinutes().length is not 1 or 2');
+    }
+    var hoursAndMinutesString = hoursString + ':' + minutesString;
+    //console.log('hoursAndMinutesString: ' + hoursAndMinutesString);
+    return hoursAndMinutesString;
+  }
+  var ohNineHundred = dateToHoursAndMinutes(ohNineHundred1970);
+  //console.log('ohNineHundred: ' + ohNineHundred);
+
+  var currentLocalTime = epochToDate(1472152320);
+  //console.log('currentLocalTime: ' + currentLocalTime);
+  var currentLocalHoursAndMinutes = dateToHoursAndMinutes(currentLocalTime);
+  //console.log('currentLocalHoursAndMinutes: ' + currentLocalHoursAndMinutes);
+
+  function epochToHoursAndMinutes(epochTime) {
+    var date = epochToDate(epochTime);
+    var hoursAndMinutes = dateToHoursAndMinutes(date);
+    return hoursAndMinutes;
+  }
+  // console.log('9:00 epochToHoursAndMinutes(61200): ' + epochToHoursAndMinutes(61200));
+  // console.log('12:59 epochToHoursAndMinutes(75540): ' + epochToHoursAndMinutes(75540));
+  // console.log('23:59 epochToHoursAndMinutes(115140): ' + epochToHoursAndMinutes(115140));
+  // console.log('0:00 epochToHoursAndMinutes(28800): ' + epochToHoursAndMinutes(28800));
+  // console.log('0:01 epochToHoursAndMinutes(115260): ' + epochToHoursAndMinutes(115260));
+  // console.log('0:00 GMT epochToHoursAndMinutes(0): ' + epochToHoursAndMinutes(0));
 
 
-  //return alert($('#technician_schedules').data('technician_schedules'));
-  console.log(gon.technician_schedules);
+  //console.log(gon.technician_schedules);
   var allSchedules = gon.technician_schedules;
-  console.log(allSchedules[0]);
+  //console.log(allSchedules[0]);
   var schedule0 = allSchedules[0];
-  console.log(schedule0["monday_start"]);
+  //console.log(schedule0["monday_start"]);
   // console.log(gon.technician_schedules[0]);
 
   function getCurrentSchedule(user_id) {
@@ -34,40 +87,83 @@ $(document).ready(function()
     var currentSchedule = gon.technician_schedules[user_id];
     var scheduleObject = {
       user_id: currentSchedule.user_id,
-      sunday_start: currentSchedule.sunday_start,
-      sunday_end: currentSchedule.sunday_end,
-      monday_start: currentSchedule.monday_start,
-      monday_end: currentSchedule.monday_end,
-      tuesday_start: currentSchedule.tuesday_start,
-      tuesday_end: currentSchedule.tuesday_end,
-      wednesday_start: currentSchedule.wednesday_start,
-      wednesday_end: currentSchedule.wednesday_end,
-      thursday_start: currentSchedule.thursday_start,
-      thursday_end: currentSchedule.thursday_end,
-      friday_start: currentSchedule.friday_start,
-      friday_end: currentSchedule.friday_end,
-      saturday_start: currentSchedule.saturday_start,
-      saturday_end: currentSchedule.saturday_end
+      sunday_start: epochToHoursAndMinutes(currentSchedule.sunday_start),
+      sunday_end: epochToHoursAndMinutes(currentSchedule.sunday_end),
+      monday_start: epochToHoursAndMinutes(currentSchedule.monday_start),
+      monday_end: epochToHoursAndMinutes(currentSchedule.monday_end),
+      tuesday_start: epochToHoursAndMinutes(currentSchedule.tuesday_start),
+      tuesday_end: epochToHoursAndMinutes(currentSchedule.tuesday_end),
+      wednesday_start: epochToHoursAndMinutes(currentSchedule.wednesday_start),
+      wednesday_end: epochToHoursAndMinutes(currentSchedule.wednesday_end),
+      thursday_start: epochToHoursAndMinutes(currentSchedule.thursday_start),
+      thursday_end: epochToHoursAndMinutes(currentSchedule.thursday_end),
+      friday_start: epochToHoursAndMinutes(currentSchedule.friday_start),
+      friday_end: epochToHoursAndMinutes(currentSchedule.friday_end),
+      saturday_start: epochToHoursAndMinutes(currentSchedule.saturday_start),
+      saturday_end: epochToHoursAndMinutes(currentSchedule.saturday_end)
     }
     console.log("currentSchedule:")
     console.log(scheduleObject);
     return scheduleObject;
   }
 
-  schedule0 = getCurrentSchedule(0);
+  var schedule = getCurrentSchedule(0);
 
   var currentScheduleEvent = [
     {
-      id: schedule0.user_id,
-      title: schedule0.user_id,
-      start: schedule0.monday_start,
-      end: schedule0.monday_end,
+      id: schedule.user_id,
+      title: schedule.user_id,
+      start: schedule.sunday_start,
+      end: schedule.sunday_end,
+      dow: [0]
+    },
+    {
+      id: schedule.user_id,
+      title: schedule.user_id,
+      start: schedule.monday_start,
+      end: schedule.monday_end,
       dow: [1]
+    },
+    {
+      id: schedule.user_id,
+      title: schedule.user_id,
+      start: schedule.tuesday_start,
+      end: schedule.tuesday_end,
+      dow: [2]
+    },
+    {
+      id: schedule.user_id,
+      title: schedule.user_id,
+      start: schedule.wednesday_start,
+      end: schedule.wednesday_end,
+      dow: [3]
+    },
+    {
+      id: schedule.user_id,
+      title: schedule.user_id,
+      start: schedule.thursday_start,
+      end: schedule.thursday_end,
+      dow: [4]
+    },
+    {
+      id: schedule.user_id,
+      title: schedule.user_id,
+      start: schedule.friday_start,
+      end: schedule.friday_end,
+      dow: [5]
+    },
+    {
+      id: schedule.user_id,
+      title: schedule.user_id,
+      start: schedule.saturday_start,
+      end: schedule.saturday_end,
+      dow: [6]
     }
   ];
-  console.log('currentScheduleEvent 0: mondays')
+  console.log('currentScheduleEvent for user_id = 0:')
   console.log(currentScheduleEvent);
 
+  // hard coded times for testing purposes
   var testEvent = [
     {
       title:'Business Hours',
@@ -181,8 +277,8 @@ $(document).ready(function()
       for demo we have added predefined events in json object.
     */
 
-    events: testEvent
-    // events: currentScheduleEvent
+    // events: testEvent
+    events: currentScheduleEvent
 
 
 
