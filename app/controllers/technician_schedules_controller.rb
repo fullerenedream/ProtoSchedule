@@ -1,10 +1,10 @@
 class TechnicianSchedulesController < ApplicationController
 
-
   def index
-    # @technician_schedules = TechnicianSchedule.all
+    # index method as it was before adding gon gem:
+    @technician_schedules = TechnicianSchedule.all
 
-    # gon passes data to js files
+    # gon gem passes data to js files
     gon.technician_schedules = TechnicianSchedule.all
   end
 
