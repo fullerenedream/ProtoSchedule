@@ -1,9 +1,8 @@
 ## ProtoSchedule - A prototype schedule app for Swift Fox, built in Ruby on Rails
 
-#### ProtoSchedule development has paused indefinitely - schedule app is now being developed in Node as
-##[nodexo](https://github.com/fullerenedream/nodexo "nodexo on github")
+### this version has paused indefinitely - schedule app is now being developed in Node as [nodexo](https://github.com/fullerenedream/nodexo "nodexo on github")
 
-
+ProtoSchedule
 * Ruby version: ruby 2.3.1p112 (2016-04-26 revision 54768) [i686-linux]
 * System dependencies: 
 * Configuration: 
